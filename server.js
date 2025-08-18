@@ -24,10 +24,16 @@ connectCloudinary()
 // Middlewares
 app.use(express.json());
 app.use(cors({
-    origin: '*', // Allow requests from any origin (Modify if a specific frontend is needed)
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    origin: ["https://nextfortunebd.com"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
+
+app.use((req, res, next) => {
+  console.log("Request from:", req.headers.origin);
+  next();
+});
+
 
 // API Endpoints
 app.use('/api/user', userRouter);
